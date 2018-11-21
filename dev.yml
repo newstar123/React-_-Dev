@@ -1,0 +1,26 @@
+name: polaris-react
+up:
+  - node:
+      yarn: true
+      version: v10.13.0 # to be kept in sync with .nvmrc and .circleci/config.yml
+  - git_hooks:
+      pre-commit: pre-commit
+
+open:
+  app: http://localhost:8080/
+  shipit: https://shipit.shopify.io/shopify/polaris-react/production
+
+commands:
+  # People new to the project might be tempted to run some
+  # common commands, so let’s have them in here.
+  # For a list of Common Commands in Projects, check out:
+  # https://github.com/Shopify/dev/wiki/Common-Commands-in-Projects
+  build: yarn run build
+  server: yarn run dev
+  style: yarn run lint
+  test: yarn run test
+  🎩:
+    desc: |
+      Start a local server with all of the component examples. {{info:ctrl+cmd+space}} to open the emoji selector in macOS
+    run: yarn run tophat
+  type-check: yarn run ts

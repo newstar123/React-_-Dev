@@ -1,0 +1,58 @@
+$action-text-spacing: rem(24px);
+
+.Page {
+  @include page-layout;
+}
+
+.fullWidth {
+  max-width: none;
+}
+
+.singleColumn {
+  max-width: layout-width(primary, max);
+}
+
+.Content {
+  @include page-content-layout;
+}
+
+.Header {
+  @include page-header-layout;
+  @include skeleton-page-header-layout;
+}
+
+.Header-hasSecondaryActions {
+  @include skeleton-page-header-has-secondary-actions;
+}
+
+.BreadcrumbAction {
+  padding-top: spacing(base);
+  padding-bottom: spacing(base);
+  margin-top: (-1 * spacing(extra-tight));
+  margin-bottom: (-1 * spacing(extra-tight));
+}
+
+.Actions {
+  @include skeleton-page-secondary-actions-layout;
+}
+
+.Action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: control-slim-height();
+  padding-right: $action-text-spacing;
+  margin-top: (-1 * spacing(extra-tight));
+  margin-bottom: (-1 * spacing(extra-tight));
+  padding-top: rem(16px);
+
+  &:first-child {
+    padding-right: 0;
+  }
+
+  @include page-content-when-partially-condensed {
+    &:not(:last-child) {
+      display: none;
+    }
+  }
+}

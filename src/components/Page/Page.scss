@@ -1,0 +1,34 @@
+$navigation-elements-height: rem(36px);
+$title-height: line-height(display-large, large-screen);
+$stacking-order: (
+  title: 10,
+  breadcrumbs: 20,
+);
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+
+.Page {
+  @include page-layout;
+
+  // Ensure bottom margins of any children are contained
+  &::after {
+    content: '';
+    display: table;
+  }
+}
+
+.fullWidth {
+  max-width: none;
+}
+
+.singleColumn {
+  max-width: layout-width(primary, max);
+}
+
+.Content {
+  @include page-content-layout;
+}

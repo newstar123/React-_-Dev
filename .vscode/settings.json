@@ -1,0 +1,49 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "css.validate": false,
+  "editor.formatOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/node_modules": true,
+    "build-esnext/": true,
+    "build-intermediate/": true,
+    "build/": true,
+    "docs/": true,
+    "esnext/": true,
+    "index.*": true,
+    "sandbox": true,
+    "styles.{css,scss}": true,
+    "styles/": true,
+    "types/": true
+  },
+  "javascript.validate.enable": false,
+  "jest.autoEnable": false,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  "scss.validate": false,
+  "search.exclude": {
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "build-intermediate/": true,
+    "build-esnext/": true,
+    "build/": true,
+    "docs/": true,
+    "esnext/": true,
+    "index.*": true,
+    "sandbox": true,
+    "styles.{css,scss}": true,
+    "styles/": true,
+    "types/": true
+  },
+  "stylelint.enable": true,
+  "typescript.tsdk": "./node_modules/typescript/lib"
+}

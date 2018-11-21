@@ -1,0 +1,24 @@
+.hidden > .LabelWrapper {
+  @include visually-hidden;
+}
+
+.LabelWrapper {
+  margin-bottom: spacing(extra-tight);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.HelpText {
+  @include text-style-body;
+  @include text-emphasis-subdued;
+  margin-top: spacing(extra-tight);
+}
+
+.Error {
+  margin-top: spacing(extra-tight);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

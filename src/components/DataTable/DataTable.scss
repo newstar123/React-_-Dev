@@ -1,0 +1,204 @@
+$fixed-column-width: rem(145px);
+$breakpoint: 768px;
+
+.DataTable {
+  position: relative;
+  max-width: 100vw;
+}
+
+.collapsed {
+  .Table {
+    &::after {
+      display: block;
+    }
+  }
+
+  .Navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: spacing() spacing(tight);
+
+    @include breakpoint-after($breakpoint, inclusive) {
+      justify-content: flex-end;
+    }
+  }
+
+  .ScrollContainer {
+    margin-left: rem($fixed-column-width);
+  }
+}
+
+.hasFooter {
+  .ScrollContainer {
+    margin-bottom: rem(52px);
+  }
+}
+
+.Navigation {
+  display: none;
+}
+
+.Pip {
+  height: rem(6px);
+  width: rem(6px);
+  background: color('ink', 'lightest');
+  border-radius: border-radius();
+
+  &:not(:last-of-type) {
+    margin-right: spacing(extra-tight);
+  }
+}
+
+.Pip-visible {
+  background: color('ink');
+}
+
+.ScrollContainer {
+  overflow-x: auto;
+  // account for a mysterious gap in Safari when not collapsed
+  margin-left: rem(140px);
+  -webkit-overflow-scrolling: touch;
+}
+
+.Table {
+  width: 100%;
+  border-spacing: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: $fixed-column-width;
+    display: none;
+    width: rem(6px);
+    background: linear-gradient(
+      to right,
+      rgba(color('black'), 0.12),
+      rgba(color('black'), 0)
+    );
+  }
+}
+
+.TableRow {
+  &:hover .Cell {
+    @include breakpoint-after($breakpoint) {
+      background: color('sky', 'lighter');
+    }
+  }
+}
+
+.TableFoot {
+  border-bottom: 0;
+}
+
+.Cell {
+  padding: spacing();
+  border-bottom: border-width() solid color('sky', 'light');
+  white-space: nowrap;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
+  vertical-align: top;
+}
+
+.Cell-numeric {
+  text-align: right;
+}
+
+.Cell-fixed {
+  @include text-emphasis-normal;
+  @include text-breakword;
+  position: absolute;
+  top: auto;
+  left: 0;
+  width: $fixed-column-width;
+  white-space: unset;
+  text-align: left;
+  backface-visibility: hidden; // stops painting on scroll (due to positioning)
+}
+
+.Cell-truncated {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.Cell-header {
+  @include text-emphasis-normal;
+  border-bottom: border(dark);
+  border-top: border();
+}
+
+.Cell-sortable {
+  cursor: pointer;
+
+  &:hover {
+    .Heading {
+      @include recolor-icon(color('indigo'));
+      color: color('indigo');
+    }
+
+    .Icon {
+      opacity: 1;
+    }
+  }
+}
+
+.Icon {
+  display: flex;
+  align-self: flex-end;
+  opacity: 0;
+  transition: opacity duration() easing(), fill duration() easing();
+}
+
+.Heading {
+  @include unstyled-button;
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  transition: color duration() easing();
+
+  &:hover,
+  &:focus {
+    @include recolor-icon(color('indigo'));
+    color: color('indigo');
+
+    .Icon {
+      opacity: 1;
+    }
+  }
+}
+
+.Heading-left {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+.Cell-sorted {
+  .Icon {
+    opacity: 1;
+  }
+}
+
+.Cell-total {
+  @include text-emphasis-strong;
+  background: color('sky', 'lighter');
+  border-bottom: border();
+}
+
+.Cell-footer {
+  @include text-emphasis-normal;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-bottom: 0;
+  background: color('sky', 'light');
+  color: color('ink', 'lighter');
+  white-space: unset;
+  text-align: center;
+  backface-visibility: hidden; // stop painting on scroll (due to positioning)
+}

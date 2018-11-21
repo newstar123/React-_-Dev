@@ -1,0 +1,173 @@
+$stacking-order: (
+  backdrop: 10,
+  content: 20,
+  input: 30,
+);
+
+.Select {
+  position: relative;
+
+  // IE 11 fix to remove default dropdown arrow
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+.disabled {
+  .Content {
+    color: color('ink', 'lightest');
+  }
+
+  .InlineLabel {
+    color: inherit;
+  }
+
+  .Icon {
+    opacity: 0.4;
+  }
+
+  .Backdrop {
+    @include control-backdrop(disabled);
+  }
+}
+
+.error {
+  .Backdrop {
+    @include control-backdrop(error);
+  }
+
+  // Need to override the higher specificity of the sibling selector
+  // so that errors still have red borders.
+  // stylelint-disable-next-line selector-max-specificity
+  .Input:focus ~ .Backdrop {
+    @include control-backdrop(focused-error);
+  }
+}
+
+.placeholder {
+  // stylelint-disable-next-line selector-max-class
+  &.error .Input {
+    // This is the only place this color is used.
+    // stylelint-disable-next-line color-no-hex
+    color: #9c9798;
+  }
+
+  // stylelint-disable-next-line selector-max-class, selector-max-specificity
+  &.error .Input:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 color('ink', 'base');
+  }
+}
+
+.Content {
+  @include text-style-input;
+  position: relative;
+  z-index: z-index(content, $stacking-order);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: control-height();
+  padding: control-vertical-padding() rem(8px) control-vertical-padding()
+    rem(12px);
+}
+
+.InlineLabel {
+  @include text-emphasis-subdued;
+  margin-right: rem(4px);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.SelectedOption {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Icon {
+  @include recolor-icon(color('ink', 'lighter'));
+}
+
+.Backdrop {
+  @include control-backdrop;
+  position: absolute;
+  z-index: z-index(backdrop, $stacking-order);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Input {
+  // Even though the input is invisible, text styles apply to the options menu
+  @include text-style-input;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: z-index(input, $stacking-order);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  // ChromeVox may hide content set to opacity: 0
+  opacity: 0.001;
+  appearance: none;
+
+  &:focus {
+    ~ .Backdrop {
+      @include control-backdrop(focused);
+    }
+  }
+}
+
+@media (-ms-high-contrast: active) {
+  .Content {
+    color: ms-high-contrast-color('text');
+    -ms-high-contrast-adjust: none;
+  }
+
+  .InlineLabel {
+    color: inherit;
+
+    &::after {
+      content: ':';
+    }
+  }
+
+  .SelectedOption {
+    color: inherit;
+  }
+
+  .Icon {
+    @include recolor-icon(ms-high-contrast-color('button-text'));
+  }
+
+  .Backdrop {
+    &::after {
+      // Remove the dotted focus outline from the control-backdrop mixin.
+      display: none;
+    }
+  }
+
+  .Input:focus {
+    ~ .Content {
+      color: ms-high-contrast-color('selected-text');
+    }
+
+    ~ .Backdrop {
+      // Align with the native styling for this element, which differs from
+      // what the control-backdrop mixin provides.
+      background-color: ms-high-contrast-color('selected-text-background');
+    }
+  }
+
+  .disabled {
+    .Content {
+      color: ms-high-contrast-color('disabled-text');
+    }
+
+    .Icon {
+      @include recolor-icon(ms-high-contrast-color('disabled-text'));
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "extends": [
+    "plugin:shopify/typescript",
+    "plugin:shopify/react",
+    "plugin:shopify/eslint-comments",
+    "plugin:shopify/jest",
+    "plugin:shopify/node",
+    "plugin:shopify/polaris",
+    "plugin:shopify/prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.3"
+    }
+  },
+  "rules": {
+    "func-style": "off",
+    "no-process-env": "off",
+    "no-warning-comments": "off",
+    "no-negated-condition": "off",
+    "consistent-return": "off",
+    "match-default-export-name": "off",
+    "jsx-use-translation-function": "off",
+    "lines-around-comment": [
+      "error",
+      {
+        "beforeBlockComment": false,
+        "allowBlockStart": false
+      }
+    ],
+    "import/no-cycle": "off",
+    "import/no-named-as-default": "off",
+    "react/button-has-type": "off",
+    "react/no-array-index-key": "off",
+    "shopify/jest/no-vague-titles": "off",
+    "shopify/jsx-no-complex-expressions": "off",
+    "shopify/no-ancestor-directory-import": "error",
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        },
+        "allowChildren": false
+      }
+    ],
+    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/anchor-has-content": "off",
+    "jsx-a11y/role-supports-aria-props": "off",
+    "jsx-a11y/mouse-events-have-key-events": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.{ts,tsx}"],
+      "rules": {
+        "shopify/no-ancestor-directory-import": "off"
+      }
+    },
+    {
+      "files": ["examples/**/*.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "import/no-unresolved": "off"
+      }
+    },
+    {
+      "files": ["playground/Playground.tsx"],
+      "rules": {
+        "react/prefer-stateless-function": "off",
+        "shopify/react-initialize-state": "off"
+      }
+    }
+  ]
+}

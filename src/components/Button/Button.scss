@@ -1,0 +1,235 @@
+$min-height: control-height();
+$vertical-padding: ($min-height - line-height(body) - rem(2px)) / 2;
+$slim-min-height: rem(30px);
+$slim-vertical-padding: ($slim-min-height - line-height(body) - rem(2px)) / 2;
+$large-min-height: rem(44px);
+$large-vertical-padding: ($large-min-height - line-height(body) - rem(2px)) / 2;
+$spinner-size: rem(20px);
+
+.Button {
+  @include button-base;
+
+  &.disabled {
+    @include base-button-disabled;
+  }
+}
+
+.Content {
+  @include text-style-button;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+.Icon {
+  transition: color duration() easing();
+
+  &:first-child {
+    // This compensates for the typical icon used in buttons being
+    // inset within its bounding box.
+    margin-left: -(spacing(extra-tight));
+  }
+
+  &:last-child {
+    // This compensates for the disclosure icon, which is substantially
+    // inset within the viewbox (and makes it look like there is too much
+    // spacing on the right of the button)
+    margin-right: -(spacing(tight));
+    margin-left: spacing(extra-tight);
+  }
+
+  + *:not(.Icon) {
+    margin-left: spacing(extra-tight);
+  }
+}
+
+.Spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($spinner-size / 2);
+  margin-left: -($spinner-size / 2);
+}
+
+.primary {
+  @include button-filled(color('indigo'), color('indigo', 'dark'));
+  @include recolor-icon(color('white'));
+
+  &.disabled {
+    @include button-filled-disabled(color('indigo'));
+  }
+}
+
+.destructive {
+  @include button-filled(color('red'), color('red', 'dark'));
+  @include recolor-icon(color('white'));
+
+  &.disabled {
+    @include button-filled-disabled(color('red'));
+  }
+}
+
+.outline {
+  @include button-outline(color('ink', 'lighter'));
+
+  &.disabled {
+    @include button-outline-disabled(color('ink', 'lighter'));
+  }
+}
+
+.destructive.outline {
+  @include button-outline(color('red'));
+  @include recolor-icon(color('red', 'dark'));
+}
+
+.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  position: relative;
+  transition: border-color duration() easing();
+
+  &,
+  &:hover,
+  &.disabled {
+    color: transparent;
+  }
+}
+
+// The way the designs work, we need to do lots of reaching down to
+// target the content in pseudo-selectors, so we need higher specificity
+// in this case.
+// stylelint-disable selector-max-specificity
+
+.plain {
+  @include recolor-icon(color('blue'));
+  margin: (-1 * $vertical-padding) rem(-8px);
+  padding-left: rem(8px);
+  padding-right: rem(8px);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: color('blue');
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include recolor-icon(color('blue', 'dark'));
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: color('blue', 'dark');
+  }
+
+  &:focus > .Content::after {
+    opacity: 1;
+  }
+
+  &.fullWidth {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &.disabled {
+    background: none;
+  }
+
+  &.sizeSlim {
+    margin-top: (-1 * $slim-vertical-padding);
+    margin-bottom: (-1 * $slim-vertical-padding);
+  }
+
+  &.sizeLarge {
+    margin: (-1 * $large-vertical-padding) (-1 * spacing(loose));
+  }
+
+  &.iconOnly {
+    @include recolor-icon(color('ink', 'lighter'));
+    margin: -0.5 * ($min-height - icon-size());
+
+    &:focus,
+    &:active {
+      @include recolor-icon(color('ink', 'lighter'));
+      background: plain-button-background();
+    }
+
+    &:hover,
+    &:active {
+      @include recolor-icon(color('ink'));
+    }
+
+    // stylelint-disable-next-line selector-max-class
+    > .Content::after {
+      display: none;
+    }
+
+    &.disabled {
+      @include recolor-icon(color('sky', 'dark'));
+    }
+  }
+
+  > .Content::after {
+    @include plain-button-backdrop;
+    content: '';
+    opacity: 0;
+  }
+
+  .Icon {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// stylelint-enable selector-max-specificity
+
+.sizeSlim {
+  min-height: $slim-min-height;
+  padding: $slim-vertical-padding rem(12px);
+}
+
+.sizeLarge {
+  min-height: $large-min-height;
+  min-width: $large-min-height;
+  padding: $large-vertical-padding rem(24px);
+
+  .Content {
+    @include text-style-button-large;
+  }
+}
+
+.fullWidth {
+  @include button-full-width;
+}
+
+.iconOnly {
+  padding-left: rem(8px);
+  padding-right: rem(8px);
+
+  &.sizeLarge {
+    padding-left: rem(12px);
+    padding-right: rem(12px);
+  }
+
+  .Icon:first-child {
+    margin-left: 0;
+  }
+
+  .Icon:last-child {
+    margin-right: rem(-4px);
+  }
+
+  .Icon:only-child {
+    margin-right: 0;
+  }
+}

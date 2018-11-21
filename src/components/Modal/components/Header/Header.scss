@@ -1,0 +1,17 @@
+.Header {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  padding: spacing() spacing(loose);
+  border-bottom: border();
+}
+
+.Title {
+  flex: 1;
+  margin-top: spacing(extra-tight);
+  word-break: break-word;
+
+  @include breakpoint-after($typography-condensed) {
+    margin-top: rem(2px);
+  }
+}

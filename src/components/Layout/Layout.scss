@@ -1,0 +1,81 @@
+$secondary-basis: layout-width(secondary, min);
+$primary-basis: layout-width(primary, min);
+$relative-size: $primary-basis / $secondary-basis;
+
+.Layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: -1 * spacing(loose);
+  margin-left: -1 * spacing(loose);
+}
+
+.Section {
+  flex: $relative-size $relative-size $primary-basis;
+  min-width: 51%;
+}
+
+.Section-secondary {
+  flex: 1 1 $secondary-basis;
+  min-width: 0;
+}
+
+.Section-fullWidth {
+  flex: 1 1 100%;
+}
+
+.AnnotatedSection {
+  min-width: 0;
+  flex: 1 1 100%;
+}
+
+.Section,
+.AnnotatedSection {
+  max-width: calc(100% - #{spacing(loose)});
+  margin-top: spacing(loose);
+  margin-left: spacing(loose);
+
+  + .AnnotatedSection {
+    @include page-content-when-not-fully-condensed {
+      padding-top: spacing(loose);
+      border-top: border();
+    }
+  }
+}
+
+.AnnotationWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1 * spacing(loose);
+  margin-left: -1 * spacing(loose);
+}
+
+.AnnotationContent {
+  flex: $relative-size $relative-size $primary-basis;
+}
+
+.Annotation {
+  flex: 1 1 $secondary-basis;
+  padding: spacing() spacing(loose) 0;
+
+  @include page-content-when-not-fully-condensed {
+    padding: spacing() 0 0;
+  }
+
+  @include page-content-when-layout-not-stacked {
+    padding: spacing(loose) spacing(loose) spacing(loose) 0;
+  }
+}
+
+.Annotation,
+.AnnotationContent {
+  min-width: 0;
+  max-width: calc(100% - #{spacing(loose)});
+  margin-top: spacing(loose);
+  margin-left: spacing(loose);
+}
+
+.AnnotationDescription {
+  @include text-emphasis-subdued;
+}

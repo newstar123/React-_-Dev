@@ -1,0 +1,15 @@
+.Label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+  @include visually-hidden;
+}
+
+.Text {
+  @include text-style-body;
+  display: block;
+  flex: 1 1 auto;
+  color: currentColor;
+  -webkit-tap-highlight-color: transparent;
+}

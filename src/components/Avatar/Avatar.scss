@@ -1,0 +1,87 @@
+$small-size: rem(32px);
+$medium-size: rem(40px);
+$large-size: rem(60px);
+
+.Avatar {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-width: $small-size;
+  max-width: 100%;
+  background: color('teal');
+  border-radius: $large-size / 2;
+  user-select: none;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+.sizeSmall {
+  width: $small-size;
+}
+
+.sizeMedium {
+  width: $medium-size;
+}
+
+.sizeLarge {
+  width: $large-size;
+}
+
+.styleOne {
+  background: color('teal');
+}
+
+.styleTwo {
+  background: color('red');
+}
+
+.styleThree {
+  background: color('orange');
+}
+
+.styleFour {
+  background: color('green');
+}
+
+.styleFive {
+  background: color('blue');
+}
+
+.styleSix {
+  background: color('purple');
+}
+
+.hasImage {
+  background: transparent;
+}
+
+.Image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  border-radius: $large-size / 2;
+  transform: translate(-50%, -50%);
+}
+
+.Initials {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: rem(2px);
+}
+
+.Svg {
+  width: rem(48px);
+  height: auto;
+  color: color('white');
+}
